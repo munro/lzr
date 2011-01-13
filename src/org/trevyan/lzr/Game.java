@@ -91,12 +91,11 @@ public class Game {
 
     // Set an initial position
     glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-    glTranslatef(-2.0f, -1.0f, -2.0f);
-    
     // Set up player's view
     glRotatef(player.getYaw(), 0.0f, 1.0f, 0.0f);
     glTranslatef(player.getX(), 0.0f, player.getZ());
-    
+    // Set an initial position
+    glTranslatef(-2.0f, -1.6f, -2.0f);
     
     // Update objects
     player.update(delta);

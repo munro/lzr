@@ -19,19 +19,24 @@ public class LaserPlayerController {
     return laser.getYaw();
   }
   public void update(float delta) {
+    float rotate_speed = 80.0f;
+    float move_speed =  5.5f;
+    if((Keyboard.isKeyDown(Keyboard.KEY_W) || Keyboard.isKeyDown(Keyboard.KEY_S))
+        && (Keyboard.isKeyDown(Keyboard.KEY_A) || Keyboard.isKeyDown(Keyboard.KEY_D)))
+      move_speed /= 2;
     // Looking
     if(Keyboard.isKeyDown(Keyboard.KEY_LEFT))
-      laser.setYaw(laser.getYaw() - delta * 80.0f);
+      laser.setYaw(laser.getYaw() - delta * rotate_speed);
     else if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT))
-      laser.setYaw(laser.getYaw() + delta * 80.0f);
+      laser.setYaw(laser.getYaw() + delta * rotate_speed);
     // Moving
     if(Keyboard.isKeyDown(Keyboard.KEY_W))
-      laser.move(delta * 7.0f, DIRECTION.FORWARD);
+      laser.move(delta * move_speed, DIRECTION.FORWARD);
     else if(Keyboard.isKeyDown(Keyboard.KEY_S))
-      laser.move(delta * 7.0f, DIRECTION.BACKWARD);
+      laser.move(delta * move_speed, DIRECTION.BACKWARD);
     if(Keyboard.isKeyDown(Keyboard.KEY_A))
-      laser.move(delta * 7.0f, DIRECTION.LEFT);
+      laser.move(delta * move_speed, DIRECTION.LEFT);
     else if(Keyboard.isKeyDown(Keyboard.KEY_D))
-      laser.move(delta * 7.0f, DIRECTION.RIGHT);
+      laser.move(delta * move_speed, DIRECTION.RIGHT);
   }
 }

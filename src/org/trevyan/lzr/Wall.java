@@ -5,7 +5,7 @@ import org.lwjgl.util.vector.*;
 
 class Wall implements Object {
   public static float FLOOR = 0.0f;
-  public static float CEILING = 2.0f; 
+  public static float CEILING = 2.5f; 
   private Vector2f a, b;
   
   public Wall(Vector2f a, Vector2f b) {
@@ -20,10 +20,12 @@ class Wall implements Object {
     texture.render(packet);
     texture.commit();
   }*/
+  
   @Override
   public boolean update(float delta) {
     return true;
   }
+  
   @Override
   public void render() {
     glBegin(GL_QUADS);
@@ -32,6 +34,10 @@ class Wall implements Object {
       glVertex3f(b.x, CEILING, b.y);
       glVertex3f(a.x, CEILING, a.y);
     glEnd();
+  }
+  
+  public boolean intersectsLine(Vector2f c, Vector2f d) {
+    return World.intersectsLine(a, b, c, d);
   }
 }
 

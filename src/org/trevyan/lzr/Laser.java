@@ -52,20 +52,20 @@ public class Laser implements Object {
     return position.y;
   }
   public void move(float distance, DIRECTION direction) {
-    
+    Vector2f new_position = new Vector2f(position);
     if(direction == DIRECTION.FORWARD || direction == DIRECTION.BACKWARD) {
       double rad = Math.toRadians(yaw);
       float sin = (float)Math.sin(rad) * distance;
       float cos = (float)Math.cos(rad) * distance;
       
       if(direction == DIRECTION.FORWARD) {
-        position.x -= cos;
-        position.y -= sin;
+        new_position.x -= cos;
+        new_position.y -= sin;
       }
       else
       {
-        position.x += cos;
-        position.y += sin;
+        new_position.x += cos;
+        new_position.y += sin;
       }
     }
     else
@@ -75,15 +75,20 @@ public class Laser implements Object {
       float cos = (float)Math.cos(rad) * distance;
       
       if(direction == DIRECTION.LEFT) {
-        position.x += cos;
-        position.y += sin;
+        new_position.x += cos;
+        new_position.y += sin;
       }
       else
       {
-        position.x -= cos;
-        position.y -= sin;
+        new_position.x -= cos;
+        new_position.y -= sin;
       }
     }
+    System.out.println(World.intersectsLine(
+        new Vector2f(0.0f, 0.0f), new Vector2f(2.0f, 0.0f),
+        new Vector2f(1.0f, -1.0f), new Vector2f(1.0f, -0.0f)));
+    if(!World.getInst().intersectsWall(position, new_position))
+      position = new_position;
   }
   public float getYaw() {
     return yaw;
